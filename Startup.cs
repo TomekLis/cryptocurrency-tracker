@@ -1,12 +1,15 @@
+using CryptocurrencyTracker.Data;
+using CryptocurrencyTracker.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace cryptocurrency_tracker
+namespace CryptocurrencyTracker
 {
     public class Startup
     {
@@ -27,6 +30,23 @@ namespace cryptocurrency_tracker
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            // Add framework services.
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                b => b.MigrationsAssembly("CryptocurrencyTracker")));
+
+            services.AddDefaultIdentity<AppUser>()
+                //(o =>
+                //{
+                //    // configure identity options
+                //    //o.Password.RequireDigit = false;
+                //    //o.Password.RequireLowercase = false;
+                //    //o.Password.RequireUppercase = false;
+                //    //o.Password.RequireNonAlphanumeric = false;
+                //    //o.Password.RequiredLength = 6;
+                //})
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

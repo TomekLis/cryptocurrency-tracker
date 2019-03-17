@@ -1,6 +1,6 @@
 {
-  "short_name": "cryptocurrency_tracker",
-  "name": "cryptocurrency_tracker",
+  "short_name": "CryptocurrencyTracker",
+  "name": "CryptocurrencyTracker",
   "icons": [
     {
       "src": "favicon.ico",

@@ -12,7 +12,7 @@ export class NavMenu extends Component {
       <Navbar inverse fixedTop fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={'/'}>cryptocurrency_tracker</Link>
+            <Link to={'/'}>CryptocurrencyTracker</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
