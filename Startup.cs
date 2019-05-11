@@ -1,3 +1,4 @@
+using CryptocurrencyTracker.Authorization;
 using CryptocurrencyTracker.Data;
 using CryptocurrencyTracker.Model;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,7 @@ namespace CryptocurrencyTracker
                 //})
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddSingleton<IJwtFactory, JwtFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
