@@ -1,5 +1,6 @@
 using CryptocurrencyTracker.Authorization;
 using CryptocurrencyTracker.Data;
+using CryptocurrencyTracker.Helpers;
 using CryptocurrencyTracker.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,11 +10,16 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace CryptocurrencyTracker
 {
     public class Startup
     {
+        private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH";
+        private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,6 +42,24 @@ namespace CryptocurrencyTracker
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("CryptocurrencyTracker")));
 
+            // jwt wire up
+            // Get options from app settings
+            var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+
+            // Configure JwtIssuerOptions
+            services.Configure<JwtIssuerOptions>(options =>
+            {
+                options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
+                options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
+                options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
+            });
+
+            // api user claim policy
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+            });
+
             services.AddDefaultIdentity<AppUser>()
                 //(o =>
                 //{
@@ -52,7 +76,7 @@ namespace CryptocurrencyTracker
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<AppUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -84,6 +108,18 @@ namespace CryptocurrencyTracker
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+            // Shows UseCors with CorsPolicyBuilder.
+            app.UseCors(builder =>
+               builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            ApplicationDbInitializer.SeedUsers(userManager);
+            //app.UseJwtBearerAuthentication(new JwtBearerOptions
+            //{
+            //    AutomaticAuthenticate = true,
+            //    AutomaticChallenge = true,
+            //    TokenValidationParameters = tokenValidationParameters
+            //});
         }
     }
 }

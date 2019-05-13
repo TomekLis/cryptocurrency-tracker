@@ -45,7 +45,7 @@ namespace CryptocurrencyTracker.Controllers
             var identity = await GetClaimsIdentity(credentials.UserName, credentials.Password);
             if (identity == null)
             {
-                return BadRequest(Errors.AddErrorToModelState("login_failure", "Invalid username or password.", ModelState));
+                return BadRequest(Errors.AddErrorToModelState("message", "Invalid username or password.", ModelState));
             }
 
             // Serialize and return the response
