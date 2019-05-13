@@ -27,6 +27,6 @@ function getHistoricalData() {
         return { type: historicalDataConstants.HISTORICAL_DATA_REQUEST };
     }
     function success(response) {
-        return { type: historicalDataConstants.HISTORICAL_DATA_SUCCESS, response };
+        return { type: historicalDataConstants.HISTORICAL_DATA_SUCCESS, data: response };
     }
 }

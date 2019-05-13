@@ -1,13 +1,13 @@
 import { historicalDataConstants } from '../constants';
 
-const initialState = {};
+const initialState = { loadingData: false, data: [] };
 
 export function historicalData(state = initialState, action) {
     switch (action.type) {
         case historicalDataConstants.HISTORICAL_DATA_REQUEST:
             return {
                 loadingData: true,
-                data: action.data
+                data: []
             };
         case historicalDataConstants.HISTORICAL_DATA_SUCCESS:
             return {

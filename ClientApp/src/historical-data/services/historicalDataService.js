@@ -15,31 +15,23 @@ function getHistoricalData() {
         headers: { 'authorization': 'Apikey 9b19040948791a2d14d0d2648b9b4869b0d3cab5b0364b9e0c5948c16bbfa706' },
     };
 
-    return fetch(`${config.dataProviderApi}/histohour?fsym=BTC&tsym=USD&limit=10`, requestOptions)
+    return fetch(`${config.dataProviderApi}/histoday?fsym=BTC&tsym=USD&limit=100&toTs=${new Date().getTime()}`, requestOptions)
         .then(handleResponse)
-        .then(data => data);
-}
-
-function logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('user');
 }
 
 function handleResponse(response) {
     console.log(response);
-    // return response.text().then(text => {
-    //     const data = text && JSON.parse(text);
-    //     if (!response.ok) {
-    //         if (response.status === 401) {
-    //             // auto logout if 401 response returned from api
-    //             logout();
-    //             window.location.reload(true);
-    //         }
+    return response.text().then(text => {
+        const data = text && JSON.parse(text);
+        if (!response.ok) {
+            if (response.status === 401) {
+                console.log(response)
+            }
 
-    //         const error = (data && data.message) || response.statusText;
-    //         return Promise.reject(error);
-    //     }
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+        }
 
-    //     return data;
-    // });
+        return data.Data;
+    });
 }

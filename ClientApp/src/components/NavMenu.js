@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom';
 import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import './NavMenu.css';
+import { userActions } from '../authentication';
 
 export class NavMenu extends Component {
   displayName = NavMenu.name
 
+  handleClick(event) {
+    userActions.logout();
+  }
+  
   render() {
     return (
       <Navbar inverse fixedTop fluid collapseOnSelect>
@@ -23,16 +28,19 @@ export class NavMenu extends Component {
                 <Glyphicon glyph='home' /> Home
               </NavItem>
             </LinkContainer>
-            <LinkContainer to={'/counter'}>
+            <LinkContainer to={'/statistics'}>
               <NavItem>
-                <Glyphicon glyph='education' /> Counter
+                <Glyphicon glyph='stats' /> Statistics
               </NavItem>
             </LinkContainer>
-            <LinkContainer to={'/fetchdata'}>
+            <LinkContainer to={'/investments'}>
               <NavItem>
-                <Glyphicon glyph='th-list' /> Fetch data
+                <Glyphicon glyph='bitcoin' /> Investments
               </NavItem>
             </LinkContainer>
+            <NavItem onClick={this.handleClick.bind(this)}>
+              <Glyphicon glyph='off' /> Log out
+            </NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
