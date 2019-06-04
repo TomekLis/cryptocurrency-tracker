@@ -8,6 +8,8 @@ import Counter from "./components/Counter";
 import { LoginPage, PrivateRoute, alertActions } from './authentication';
 import { history } from './helpers';
 import { HistoricalData } from "./historical-data/components/HistoricalData";
+import Admin from "./layouts/Admin.jsx";
+import "./assets/css/material-dashboard-react.css?v=1.6.0";
 
 
 class App extends Component {
@@ -26,24 +28,21 @@ class App extends Component {
   render() {
     const { alert } = this.props;
     return (
-      <div className="jumbotron">
-        <div className="container">
-          <div className="col-sm-12">
-            {alert.message &&
-              <div className={`alert ${alert.type}`}>
-                {alert.message.toString()}
-              </div>
-            }
-            <Router history={history}>
-              <div>
-                <Route path="/login" component={LoginPage} />
-                <PrivateRoute exact path="/" component={Home} />
-                <PrivateRoute exact path="/statistics" component={HistoricalData} />
-                <PrivateRoute exact path="/investments" component={Counter} />
-              </div>
-            </Router>
+      <div className="col-sm-12">
+        {alert.message &&
+          <div className={`alert ${alert.type}`}>
+            {alert.message.toString()}
           </div>
-        </div>
+        }
+        <Router history={history}>
+          <div>
+            <Route path="/login" component={LoginPage} />
+            <Route path="/admin" component={Admin} />
+            <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/statistics" component={HistoricalData} />
+            <PrivateRoute exact path="/investments" component={Counter} />
+          </div>
+        </Router>
       </div>
     );
   }
