@@ -6,11 +6,12 @@ namespace CryptocurrencyTracker.Model
 
     public class AppUser : IdentityUser
     {
-        public virtual ICollection<Cryptocurrency> Cryptocurrencies { get; set; }
-
         public AppUser()
         {
-            Cryptocurrencies = new HashSet<Cryptocurrency>();
+            Charts = new HashSet<Chart>();
         }
+
+        public virtual ICollection<Chart> Charts { get; set; }
+
     }
 }

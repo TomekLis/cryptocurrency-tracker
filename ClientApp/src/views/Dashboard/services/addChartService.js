@@ -1,30 +1,30 @@
 /* eslint-disable no-console */
 // import config from 'config';
-import { authHeader } from "../../helpers";
+import { authHeader } from "../../../helpers";
 
-export const historicalDataService = {
-  getHistoricalData
+export const chartService = {
+  createChart
 };
 
 const config = {
-  dataProviderApi: "https://min-api.cryptocompare.com/data"
+  apiUrl: "api/chart"
 };
 
-function getHistoricalData() {
+function createChart(data) {
+  const authorization = authHeader();
   const requestOptions = {
-    method: "GET",
+    method: "POST",
+    // headers: { "Content-Type": "application/json",  },
     headers: {
-      authorization:
-        "Apikey 9b19040948791a2d14d0d2648b9b4869b0d3cab5b0364b9e0c5948c16bbfa706"
-    }
+      "Content-Type": "application/json",
+      ...authorization
+    },
+    body: JSON.stringify({ ...data })
   };
 
-  return fetch(
-    `${
-      config.dataProviderApi
-    }/histoday?fsym=BTC&tsym=USD&limit=100&toTs=${new Date().getTime()}`,
-    requestOptions
-  ).then(handleResponse);
+  return fetch(`${config.apiUrl}/createChart`, requestOptions).then(
+    handleResponse
+  );
 }
 
 function handleResponse(response) {

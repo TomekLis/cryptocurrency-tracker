@@ -11,6 +11,7 @@ namespace CryptocurrencyTracker.Data
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<Cryptocurrency> Cryptocurrencies { get; set; }
+        public DbSet<Chart> Charts { get; set; }
+        //public DbSet<Cryptocurrency> Cryptocurrencies { get; set; }
     }
 }
