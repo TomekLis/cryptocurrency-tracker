@@ -39,8 +39,8 @@ namespace CryptocurrencyTracker.Controllers
             }
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            await _chartService.GetUsersCharts(userId);
-            return Ok();
+            var charts = _chartService.GetUsersCharts(userId);
+            return Ok(charts);
         }
 
     }

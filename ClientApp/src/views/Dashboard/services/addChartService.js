@@ -3,7 +3,8 @@
 import { authHeader } from "../../../helpers";
 
 export const chartService = {
-  createChart
+  createChart,
+  getUsersCharts
 };
 
 const config = {
@@ -27,6 +28,22 @@ function createChart(data) {
   );
 }
 
+function getUsersCharts() {
+  const authorization = authHeader();
+  const requestOptions = {
+    method: "GET",
+    // headers: { "Content-Type": "application/json",  },
+    headers: {
+      "Content-Type": "application/json",
+      ...authorization
+    }
+  };
+
+  return fetch(`${config.apiUrl}/usersCharts`, requestOptions).then(
+    handleResponse
+  );
+}
+
 function handleResponse(response) {
   console.log(response);
   return response.text().then(text => {
@@ -40,6 +57,6 @@ function handleResponse(response) {
       return Promise.reject(error);
     }
 
-    return data.Data;
+    return data;
   });
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Table from "@material-ui/core/Table";
@@ -21,8 +22,8 @@ function CustomTable({ ...props }) {
               {tableHead.map((prop, key) => {
                 return (
                   <TableCell
-                    className={classes.tableCell + " " + classes.tableHeadCell}
                     key={key}
+                    className={classes.tableCell + " " + classes.tableHeadCell}
                   >
                     {prop}
                   </TableCell>
@@ -34,6 +35,7 @@ function CustomTable({ ...props }) {
         <TableBody>
           {tableData.map((prop, key) => {
             return (
+              // <Link to={"/"} key={key}>
               <TableRow key={key}>
                 {prop.map((prop, key) => {
                   return (
@@ -43,6 +45,7 @@ function CustomTable({ ...props }) {
                   );
                 })}
               </TableRow>
+              // </Link>
             );
           })}
         </TableBody>

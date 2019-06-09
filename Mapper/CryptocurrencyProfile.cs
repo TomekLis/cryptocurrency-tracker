@@ -8,7 +8,13 @@ namespace CryptocurrencyTracker.Mapper
     {
         public CryptocurrencyProfile()
         {
-            CreateMap<CreateChartDto, Chart>();
+            CreateMap<CreateChartDto, Chart>()
+                .ForMember(x => x.EndingDate, opts => opts.MapFrom(x => x.EndDate))
+                .ForMember(x => x.StartingDate, opts => opts.MapFrom(x => x.StartDate));
+
+            CreateMap<Chart, CreateChartDto>()
+                .ForMember(x => x.EndDate, opts => opts.MapFrom(x => x.EndingDate))
+                .ForMember(x => x.StartDate, opts => opts.MapFrom(x => x.StartingDate));
         }
     }
 }

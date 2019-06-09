@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CryptocurrencyTracker.Data;
 using CryptocurrencyTracker.Dtos;
 using CryptocurrencyTracker.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CryptocurrencyTracker.Services
 {
@@ -26,9 +28,18 @@ namespace CryptocurrencyTracker.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        //public Task<CreateChartDto> GetUsersCharts(string userId)
-        //{
-        //    var usersCharts = _dbContext.Get
-        //}
+
+        public IEnumerable<CreateChartDto> GetUsersCharts(string userId)
+        {
+            var charts = 
+                _dbContext
+                .Charts
+                .Include(x => x.User)
+                .Where(x => x.User.UserName == userId);
+            var chartDtos = _mapper.Map<IEnumerable<CreateChartDto>>(charts);
+
+            return chartDtos;
+        }
+
     }
 }

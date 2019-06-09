@@ -63,7 +63,6 @@ const AddChartForm = ({
           <GridContainer>
             <GridItem xs={12} sm={12} md={2}>
               <Field
-                // validate={[required]}
                 name="ChartName"
                 component={renderTextField}
                 label="Chart name"
@@ -72,14 +71,12 @@ const AddChartForm = ({
             <GridItem xs={12} sm={12} md={5}>
               <Field
                 name="StartDate"
-                // validate={[required]}
                 component={renderDateTimeField}
                 label="Start date"
               />
             </GridItem>
             <GridItem xs={12} sm={12} md={5}>
               <Field
-                // validate={[required]}
                 name="EndDate"
                 component={renderDateTimeField}
                 label="End date"

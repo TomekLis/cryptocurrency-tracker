@@ -1,26 +1,29 @@
 import { chartDataConstants } from "../constants";
 
 const initialState = {
-  loadingChart: false,
+  loadingCharts: false,
   charts: [],
   addingChart: false
 };
 
 export function chartData(state = initialState, action) {
   switch (action.type) {
-    case chartDataConstants.HISTORICAL_DATA_SUCCESS:
+    case chartDataConstants.CHART_DATA_REQUEST:
       return {
-        loadingData: true,
+        ...state,
+        loadingCharts: true,
         data: []
       };
-    case chartDataConstants.HISTORICAL_DATA_SUCCESS:
+    case chartDataConstants.CHART_DATA_SUCCESS:
       return {
-        loadingData: false,
-        data: action.data
+        ...state,
+        loadingCharts: false,
+        charts: action.data
       };
-    case chartDataConstants.HISTORICAL_DATA_FAILURE:
+    case chartDataConstants.CHART_DATA_ERROR:
       return {
-        loadingData: false
+        ...state,
+        loadingCharts: false
       };
     default:
       return state;
