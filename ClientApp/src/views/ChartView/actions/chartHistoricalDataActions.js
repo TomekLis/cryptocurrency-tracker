@@ -1,15 +1,15 @@
-import { historicalDataConstants } from "../../constants";
-import { historicalDataService } from "../services/historicalDataService";
+import { historicalDataConstants } from "../../../constants";
+import { historicalDataService } from "../services/chartHistoricalDataService";
 
 export const historicalDataActions = {
   getHistoricalData
 };
 
-function getHistoricalData() {
+function getHistoricalData(chart) {
   return dispatch => {
     dispatch(requestHistoricalData());
 
-    historicalDataService.getHistoricalData().then(
+    historicalDataService.getHistoricalData(chart).then(
       response => {
         dispatch(success(response));
         // history.push("/");

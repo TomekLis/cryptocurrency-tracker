@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 // import config from 'config';
-import { authHeader } from "../../helpers";
 
 export const historicalDataService = {
   getHistoricalData
@@ -10,7 +9,7 @@ const config = {
   dataProviderApi: "https://min-api.cryptocompare.com/data"
 };
 
-function getHistoricalData() {
+function getHistoricalData(chart) {
   const requestOptions = {
     method: "GET",
     headers: {
@@ -18,11 +17,14 @@ function getHistoricalData() {
         "Apikey 9b19040948791a2d14d0d2648b9b4869b0d3cab5b0364b9e0c5948c16bbfa706"
     }
   };
-
+  const endDate = new Date(chart.endDate).getTime() / 1000;
+  const startDate = new Date(chart.startDate).getTime() / 1000;
+  const daysDifference = (endDate - startDate) / 86400;
+  console.log(chart);
   return fetch(
     `${
       config.dataProviderApi
-    }/histoday?fsym=BTC&tsym=USD&limit=100&toTs=${new Date().getTime()}`,
+    }/histoday?fsym=BTC&tsym=USD&limit=${daysDifference}&aggregate=1&toTs=${endDate}`,
     requestOptions
   ).then(handleResponse);
 }

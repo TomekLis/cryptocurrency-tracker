@@ -95,6 +95,5 @@ const AddChartForm = ({
 };
 
 export default reduxForm({
-  // a unique name for the form
   form: "createChart"
 })(AddChartForm);

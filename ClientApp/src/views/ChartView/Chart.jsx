@@ -1,63 +1,53 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-// import { historicalDataActions } from "../actions/historicalDataActions";
-// import ConfigurableChart from "../../../charts/ConfigurableChart";
-// import { ClipLoader } from "react-spinners";
+import GridItem from "../../components/Grid/GridItem.jsx";
+import GridContainer from "../../components/Grid/GridContainer.jsx";
+import Card from "../../components/Card/Card.jsx";
+import CardHeader from "../../components/Card/CardHeader.jsx";
+import CardBody from "../../components/Card/CardBody.jsx";
+import CardFooter from "../../components/Card/CardFooter.jsx";
+import ConfigurableChart from "../../charts/ConfigurableChart";
+import { historicalDataActions } from "./actions/chartHistoricalDataActions";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-const override = `
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-`;
+const getHistoricalData = (dispatch, chart) => {
+  useEffect(() => {
+    dispatch(historicalDataActions.getHistoricalData(chart));
+  }, []);
+};
 
-// const getHistoricalData = dispatch => {
-//   useEffect(() => {
-//     dispatch(historicalDataActions.getHistoricalData());
-//   }, []);
-// };
-
-const Chart = ({ id, chart, historicalData, dispatch }) => {
-  // console.log(id);
-  // getHistoricalData(dispatch);
-  // const { loadingData, data } = historicalData;
-  // const values = data ? data.map(x => x.open) : null;
-  // const labels = data
-  //   ? data.map(x => new Date(x.time * 1000).toISOString().slice(0, 10))
-  //   : null;
-  // console.log(values);
+// eslint-disable-next-line react/prop-types
+const Chart = ({ chart, historicalData, dispatch }) => {
+  getHistoricalData(dispatch, chart);
+  const { loadingData, data } = historicalData;
+  const values = data ? data.map(x => x.open) : null;
+  const labels = data
+    ? data.map(x => new Date(x.time * 1000).toISOString().slice(0, 10))
+    : null;
   return (
-    <div>{id}</div>
-    // <Fragment>
-    //   <div className="row">
-    //     <div className="col-md-12">
-    //       <div className="panel panel-default">
-    //         {loadingData && data ? (
-    //           <ClipLoader
-    //             css={override}
-    //             sizeUnit={"px"}
-    //             size={150}
-    //             color={"#123abc"}
-    //             loading={loadingData}
-    //           />
-    //         ) : (
-    //           <Fragment>
-    //             <div className="panel-heading">
-    //               <h3 className="panel-title">Panel title</h3>
-    //             </div>
-    //             <div className="panel-body">
-    //               <ConfigurableChart
-    //                 defalutValue={true}
-    //                 startLine={2}
-    //                 endLine={3}
-    //                 data={{ labels: labels, data: values }}
-    //               />
-    //             </div>
-    //           </Fragment>
-    //         )}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </Fragment>
+    <GridContainer>
+      <GridItem xs={12} sm={12} md={12}>
+        <Card chart>
+          <CardHeader color="success">
+            <h1>{chart.chartName}</h1>
+          </CardHeader>
+          <CardBody>
+            {loadingData ? (
+              <CircularProgress />
+            ) : (
+              <ConfigurableChart
+                label="BTC price in USD"
+                defalutValue={true}
+                startLine={2}
+                endLine={3}
+                data={{ labels: labels, data: values }}
+              />
+            )}
+          </CardBody>
+          <CardFooter chart />
+        </Card>
+      </GridItem>
+    </GridContainer>
   );
 };
 
@@ -65,7 +55,6 @@ function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.id;
   const chart = state.chart.charts.find(x => x.id == id);
   return {
-    id,
     chart,
     historicalData: state.historicalData
   };
