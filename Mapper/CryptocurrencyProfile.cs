@@ -15,6 +15,9 @@ namespace CryptocurrencyTracker.Mapper
             CreateMap<Chart, CreateChartDto>()
                 .ForMember(x => x.EndDate, opts => opts.MapFrom(x => x.EndingDate))
                 .ForMember(x => x.StartDate, opts => opts.MapFrom(x => x.StartingDate));
-        }
+
+            CreateMap<Investment, InvestmentDto>();
+            CreateMap<InvestmentDto, Investment>();
+       }
     }
 }

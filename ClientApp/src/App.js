@@ -10,6 +10,7 @@ import { history } from "./helpers";
 import { HistoricalData } from "./historical-data/components/HistoricalData";
 import "./assets/css/material-dashboard-react.css?v=1.6.0";
 import { Chart } from "./views/ChartView/Chart";
+import { AddInvestment } from "./views/Investments/AddInvestment";
 
 class App extends Component {
   displayName = App.name;
@@ -40,6 +41,11 @@ class App extends Component {
             <PrivateRoute exact path="/chart/:id" component={Chart} />
             <PrivateRoute exact path="/statistics" component={HistoricalData} />
             <PrivateRoute exact path="/investments" component={Counter} />
+            <PrivateRoute
+              exact
+              path="/addInvestment"
+              component={AddInvestment}
+            />
           </div>
         </Router>
       </div>

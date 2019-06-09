@@ -115,6 +115,7 @@ namespace CryptocurrencyTracker
             services.AddSingleton<IJwtFactory, JwtFactory>();
 
             services.AddScoped<IChartService, ChartService>();
+            services.AddScoped<IInvestmentService, InvestmentService>();
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)

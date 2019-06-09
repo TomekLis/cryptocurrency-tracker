@@ -19,10 +19,13 @@ import sidebarStyle from "../../assets/jss/material-dashboard-react/components/s
 const Sidebar = ({ ...props }) => {
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
-    return props && props.location && props.location.pathname.indexOf(routeName) > -1
+    return props &&
+      props.location &&
+      props.location.pathname.indexOf(routeName) > -1
       ? true
       : false;
   }
+  // eslint-disable-next-line react/prop-types
   const { classes, color, logo, image, logoText, routes } = props;
   var links = (
     <List className={classes.list}>
@@ -36,15 +39,15 @@ const Sidebar = ({ ...props }) => {
           });
         } else {
           listItemClasses = classNames({
-            [" " + classes[color]]: activeRoute(prop.layout + prop.path)
+            [" " + classes[color]]: activeRoute(prop.path)
           });
         }
         const whiteFontClasses = classNames({
-          [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path)
+          [" " + classes.whiteFont]: activeRoute(prop.path)
         });
         return (
           <NavLink
-            to={prop.layout + prop.path}
+            to={prop.path}
             className={activePro + classes.item}
             activeClassName="active"
             key={key}
@@ -59,12 +62,12 @@ const Sidebar = ({ ...props }) => {
                   {prop.icon}
                 </Icon>
               ) : (
-                  <prop.icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL]: props.rtlActive
-                    })}
-                  />
-                )}
+                <prop.icon
+                  className={classNames(classes.itemIcon, whiteFontClasses, {
+                    [classes.itemIconRTL]: props.rtlActive
+                  })}
+                />
+              )}
               <ListItemText
                 primary={props.rtlActive ? prop.rtlName : prop.name}
                 className={classNames(classes.itemText, whiteFontClasses, {

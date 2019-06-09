@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { DashboardPage } from "../views/Dashboard/Dashboard";
+import { ChartsPage } from "../views/Dashboard/Charts";
 export class Home extends Component {
   displayName = Home.name;
 
   render() {
-    return <DashboardPage />;
+    return <ChartsPage />;
   }
 }

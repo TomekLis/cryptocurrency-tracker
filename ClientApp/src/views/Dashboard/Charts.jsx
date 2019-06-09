@@ -19,7 +19,7 @@ import { connect } from "react-redux";
 import { addChartActions } from "./actions/addChartActions";
 import { withRouter } from "react-router-dom";
 
-const Dashboard = ({ classes, chartData, dispatch }) => {
+const Charts = ({ classes, chartData, dispatch }) => {
   useEffect(() => {
     dispatch(addChartActions.getUsersCharts());
   }, []);
@@ -79,7 +79,7 @@ const Dashboard = ({ classes, chartData, dispatch }) => {
   );
 };
 
-Dashboard.propTypes = {
+Charts.propTypes = {
   classes: PropTypes.object.isRequired,
   chartData: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired
@@ -91,7 +91,7 @@ const mapStateToProps = state => {
   };
 };
 
-const connectedDashboard = withRouter(
-  connect(mapStateToProps)(withStyles(dashboardStyle)(Dashboard))
+const connectedCharts = withRouter(
+  connect(mapStateToProps)(withStyles(dashboardStyle)(Charts))
 );
-export { connectedDashboard as DashboardPage };
+export { connectedCharts as ChartsPage };

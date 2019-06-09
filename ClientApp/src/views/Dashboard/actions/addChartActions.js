@@ -13,11 +13,9 @@ function createChart(data) {
 
     chartService.createChart(data).then(
       response => {
-        console.log(response);
         dispatch(successAddChart(response));
       },
       error => {
-        console.log(error);
         dispatch(errorAddChart(error));
         dispatch(push("/login"));
       }

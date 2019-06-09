@@ -1,11 +1,8 @@
 ﻿import React, { Component } from "react";
-import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
-import { Link } from "react-router-dom";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import BarChart from "@material-ui/icons/BarChart";
+import AddBox from "@material-ui/icons/AddBox";
+import AttachMoney from "@material-ui/icons/AttachMoney";
+import Add from "@material-ui/icons/Add";
 import Sidebar from "./Sidebar/Sidebar";
 import "./NavMenu.css";
 import { userActions } from "../authentication";
@@ -14,20 +11,24 @@ import image from "../assets/img/sidebar-2.jpg";
 
 const dashboardRoutes = [
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    rtlName: "لوحة القيادة",
-    icon: Dashboard,
-    component: <div>elo</div>,
-    layout: "/admin"
+    path: "/",
+    name: "Charts",
+    icon: BarChart
   },
   {
-    path: "/user",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: Person,
-    component: <div>elo</div>,
-    layout: "/admin"
+    path: "/addChart",
+    name: "Add Chart",
+    icon: AddBox
+  },
+  {
+    path: "/investments",
+    name: "Investments",
+    icon: AttachMoney
+  },
+  {
+    path: "/addInvestment",
+    name: "Add investment",
+    icon: Add
   }
 ];
 
@@ -45,7 +46,7 @@ export class NavMenu extends Component {
 
   displayName = NavMenu.name;
 
-  handleClick(event) {
+  handleClick() {
     userActions.logout();
   }
 
@@ -60,40 +61,6 @@ export class NavMenu extends Component {
         open={this.state.mobileOpen}
         color={this.state.color}
       />
-      // <Navbar>
-      //   {/* <Navbar.Header>
-      //     <Navbar.Brand>
-      //       <Link to={'/'}>CryptocurrencyTracker</Link>
-      //     </Navbar.Brand>
-      //     <Navbar.Toggle />
-      //   </Navbar.Header> */}
-      //   <Navbar.Collapse>
-      //     <Nav>
-      //       <LinkContainer to={'/'} exact>
-      //         <NavItem>
-      //           <FontAwesomeIcon icon="check-square" />
-      //           Home
-      //          </NavItem>
-      //       </LinkContainer>
-      //       <LinkContainer to={'/statistics'}>
-      //         <NavItem>
-      //           <FontAwesomeIcon icon="check-square" />
-      //           Statistics
-      //          </NavItem>
-      //       </LinkContainer>
-      //       <LinkContainer to={'/investments'}>
-      //         <NavItem>
-      //           <FontAwesomeIcon icon="check-square" />
-      //           Investments
-      //          </NavItem>
-      //       </LinkContainer>
-      //       <NavItem onClick={this.handleClick.bind(this)}>
-      //         <FontAwesomeIcon icon="check-square" />
-      //         Log out
-      //        </NavItem>
-      //     </Nav>
-      //   </Navbar.Collapse>
-      // </Navbar>
     );
   }
 }
