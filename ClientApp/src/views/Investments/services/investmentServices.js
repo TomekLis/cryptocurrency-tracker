@@ -1,7 +1,8 @@
 import { authHeader } from "../../../helpers";
 
 export const investmentServices = {
-  createInvestment
+  createInvestment,
+  getUsersInvestments
 };
 
 const config = {
@@ -24,29 +25,28 @@ function createInvestment(data) {
   );
 }
 
-// function getUsersCharts() {
-//   const authorization = authHeader();
-//   const requestOptions = {
-//     method: "GET",
-//     // headers: { "Content-Type": "application/json",  },
-//     headers: {
-//       "Content-Type": "application/json",
-//       ...authorization
-//     }
-//   };
+function getUsersInvestments() {
+  const authorization = authHeader();
+  const requestOptions = {
+    method: "GET",
+    // headers: { "Content-Type": "application/json",  },
+    headers: {
+      "Content-Type": "application/json",
+      ...authorization
+    }
+  };
 
-//   return fetch(`${config.apiUrl}/usersCharts`, requestOptions).then(
-//     handleResponse
-//   );
-// }
+  return fetch(`${config.apiUrl}/usersInvestments`, requestOptions).then(
+    handleResponse
+  );
+}
 
 function handleResponse(response) {
-  console.log(response);
   return response.text().then(text => {
     const data = text && JSON.parse(text);
     if (!response.ok) {
+      // eslint-disable-next-line no-empty
       if (response.status === 401) {
-        console.log(response);
       }
 
       const error = (data && data.message) || response.statusText;

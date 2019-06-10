@@ -5,9 +5,7 @@ import CardBody from "../../components/Card/CardBody.jsx";
 import CardFooter from "../../components/Card/CardFooter.jsx";
 import GridItem from "../../components/Grid/GridItem.jsx";
 import GridContainer from "../../components/Grid/GridContainer.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 import Button from "../../components/CustomButtons/Button.jsx";
-import InputLabel from "@material-ui/core/InputLabel";
 import { Field, reduxForm } from "redux-form";
 import TextField from "@material-ui/core/TextField";
 
@@ -49,7 +47,6 @@ const AddChartForm = ({
   classes,
   handleSubmit,
   pristine,
-  reset,
   submitting
 }) => {
   return (

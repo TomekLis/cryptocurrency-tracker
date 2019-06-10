@@ -9,17 +9,9 @@ function getHistoricalData(chart) {
   return dispatch => {
     dispatch(requestHistoricalData());
 
-    historicalDataService.getHistoricalData(chart).then(
-      response => {
-        dispatch(success(response));
-        // history.push("/");
-      },
-      error => {
-        console.log(error);
-        // dispatch(failure(error));
-        // dispatch(alertActions.error(error));
-      }
-    );
+    historicalDataService.getHistoricalData(chart).then(response => {
+      dispatch(success(response));
+    });
   };
 
   function requestHistoricalData() {

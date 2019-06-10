@@ -9,6 +9,7 @@ namespace CryptocurrencyTracker.Model
         public string ChartName { get; set; }
         public string StartingDate { get; set; }
         public string EndingDate { get; set; }
+        public string Cryptocurrency { get; set; }
         public virtual AppUser User { get; set; }
         public string UserId { get; set; }
     }

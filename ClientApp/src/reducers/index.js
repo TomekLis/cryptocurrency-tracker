@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { authentication } from "./authentication.reducer";
 import { users } from "./users.reducer";
 import { alert } from "./alert.reducer";
+import { investmentData } from "./investment.reducer";
 import { historicalData } from "./historical-data.reducer";
 import { reducer as formReducer } from "redux-form";
 import { chartData } from "./chart.reducer";
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   alert,
   historicalData,
   chart: chartData,
+  investment: investmentData,
   form: formReducer,
   routing: routerReducer
 });

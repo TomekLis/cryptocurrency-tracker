@@ -31,18 +31,18 @@ namespace CryptocurrencyTracker.Controllers
             return Ok();
         }
 
-        //[HttpGet("usersCharts")]
-        //public async Task<IActionResult> GetUsersCharts()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [HttpGet("usersInvestments")]
+        public async Task<IActionResult> GetUsersInvestments()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        //    var charts = _chartService.GetUsersCharts(userId);
-        //    return Ok(charts);
-        //}
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var investments = await _investmentService.GetUsersInvestments(userId);
+            return Ok(investments);
+        }
 
     }
 }

@@ -18,6 +18,9 @@ namespace CryptocurrencyTracker.Mapper
 
             CreateMap<Investment, InvestmentDto>();
             CreateMap<InvestmentDto, Investment>();
-       }
+
+            CreateMap<Investment, CalculatedInvestmentDto>()
+                .ForMember(x => x.Revenue, opts => opts.Ignore());
+        }
     }
 }

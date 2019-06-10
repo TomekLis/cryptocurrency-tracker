@@ -3,7 +3,8 @@ import { investmentServices } from "../services/investmentServices";
 import { push } from "react-router-redux";
 
 export const investmentActions = {
-  createInvestment
+  createInvestment,
+  getUsersInvestments
   //   getUsersCharts
 };
 
@@ -23,21 +24,21 @@ function createInvestment(data) {
   };
 }
 
-// function getUsersCharts() {
-//   return dispatch => {
-//     dispatch(requestGetUsersCharts());
+function getUsersInvestments() {
+  return dispatch => {
+    dispatch(requestGetUsersInvestments());
 
-//     chartService.getUsersCharts().then(
-//       response => {
-//         dispatch(successGetUsersCharts(response));
-//       },
-//       error => {
-//         dispatch(errorGetUsersCharts(error));
-//         dispatch(push("/login"));
-//       }
-//     );
-//   };
-// }
+    investmentServices.getUsersInvestments().then(
+      response => {
+        dispatch(successGetUsersInvestments(response));
+      },
+      error => {
+        dispatch(errorGetUsersInvestments(error));
+        dispatch(push("/login"));
+      }
+    );
+  };
+}
 
 function requestCreateInvestment() {
   return { type: investmentConstants.CREATE_INVESTMENT_REQUEST };
@@ -49,12 +50,12 @@ function errorCreateInvestment() {
   return { type: investmentConstants.CREATE_INVESTMENT_ERROR };
 }
 
-// function requestGetUsersCharts() {
-//   return { type: investmentConstants.CHART_DATA_REQUEST };
-// }
-// function successGetUsersCharts(response) {
-//   return { type: investmentConstants.CHART_DATA_SUCCESS, data: response };
-// }
-// function errorGetUsersCharts() {
-//   return { type: investmentConstants.CHART_DATA_ERROR };
-// }
+function requestGetUsersInvestments() {
+  return { type: investmentConstants.INVESTMENT_DATA_REQUEST };
+}
+function successGetUsersInvestments(response) {
+  return { type: investmentConstants.INVESTMENT_DATA_SUCCESS, data: response };
+}
+function errorGetUsersInvestments() {
+  return { type: investmentConstants.INVESTMENT_DATA_ERROR };
+}

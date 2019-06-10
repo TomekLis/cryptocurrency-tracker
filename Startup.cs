@@ -16,6 +16,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Text;
 
@@ -119,7 +121,11 @@ namespace CryptocurrencyTracker
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .AddJsonOptions(options => {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
 
             services.AddAutoMapper();
             services.AddCors();

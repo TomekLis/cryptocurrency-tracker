@@ -6,7 +6,7 @@ import Add from "@material-ui/icons/Add";
 import Sidebar from "./Sidebar/Sidebar";
 import "./NavMenu.css";
 import { userActions } from "../authentication";
-import logo from "../assets/img/reactlogo.png";
+import logo from "../assets/img/bitcoin-logo.png";
 import image from "../assets/img/sidebar-2.jpg";
 
 const dashboardRoutes = [
@@ -54,7 +54,7 @@ export class NavMenu extends Component {
     return (
       <Sidebar
         routes={dashboardRoutes}
-        logoText={"Creative Tim"}
+        logoText={"CRYPTO TRACKER"}
         logo={logo}
         image={this.state.image}
         handleDrawerToggle={this.handleDrawerToggle}

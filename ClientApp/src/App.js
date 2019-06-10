@@ -11,6 +11,7 @@ import { HistoricalData } from "./historical-data/components/HistoricalData";
 import "./assets/css/material-dashboard-react.css?v=1.6.0";
 import { Chart } from "./views/ChartView/Chart";
 import { AddInvestment } from "./views/Investments/AddInvestment";
+import { InvestmentsPage } from "./views/Investments/InvestmentsPage";
 
 class App extends Component {
   displayName = App.name;
@@ -40,7 +41,11 @@ class App extends Component {
             <PrivateRoute exact path="/" component={Home} />
             <PrivateRoute exact path="/chart/:id" component={Chart} />
             <PrivateRoute exact path="/statistics" component={HistoricalData} />
-            <PrivateRoute exact path="/investments" component={Counter} />
+            <PrivateRoute
+              exact
+              path="/investments"
+              component={InvestmentsPage}
+            />
             <PrivateRoute
               exact
               path="/addInvestment"

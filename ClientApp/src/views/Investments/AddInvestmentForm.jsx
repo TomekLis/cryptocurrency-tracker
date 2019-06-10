@@ -162,7 +162,7 @@ const AddInvestmentForm = ({
                 <MenuItem value="ETH"> Ethereum	</MenuItem>
                 <MenuItem value="XRP">XRP</MenuItem>
                 <MenuItem value="LTC"> Litecoin	</MenuItem>
-                <MenuItem value="Bitcoin Cash">BCH</MenuItem>
+                <MenuItem value="BCH">Bitcoin Cash</MenuItem>
                 <MenuItem value="EOS">EOS</MenuItem>
               </Field>
             </GridItem>

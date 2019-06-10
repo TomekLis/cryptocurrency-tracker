@@ -31,7 +31,7 @@ namespace CryptocurrencyTracker.Controllers
             return Ok();
         }
         [HttpGet("usersCharts")]
-        public async Task<IActionResult> GetUsersCharts()
+        public IActionResult GetUsersCharts()
         {
             if (!ModelState.IsValid)
             {

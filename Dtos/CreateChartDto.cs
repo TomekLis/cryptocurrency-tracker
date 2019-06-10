@@ -6,5 +6,6 @@
         public string ChartName { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public string Cryptocurrency { get; set; }
     }
 }
