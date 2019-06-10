@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import dashboardStyle from "../../assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
-import AddChartForm from "./AddChartForm.jsx";
 import { connect } from "react-redux";
 import { addChartActions } from "./actions/addChartActions";
 import { withRouter } from "react-router-dom";
@@ -23,12 +22,6 @@ const Charts = ({ classes, chartData, dispatch }) => {
   useEffect(() => {
     dispatch(addChartActions.getUsersCharts());
   }, []);
-  // const classesProgress = useStyles();
-
-  const submit = values => {
-    // print the form values to the console
-    dispatch(addChartActions.createChart(values));
-  };
 
   const { loadingCharts } = chartData;
 
@@ -41,10 +34,7 @@ const Charts = ({ classes, chartData, dispatch }) => {
           ) : (
             <Card>
               <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Simple Table</h4>
-                <p className={classes.cardCategoryWhite}>
-                  Here is a subtitle for this table
-                </p>
+                <h4 className={classes.cardTitleWhite}>User's charts</h4>
               </CardHeader>
               <CardBody>
                 <Table
@@ -61,18 +51,12 @@ const Charts = ({ classes, chartData, dispatch }) => {
                       <Link key={x[0]} to={`chart/${x[0]}`}>
                         {x[1]}
                       </Link>,
-                      ...x.splice(2),
-                      "BTC"
+                      ...x.splice(2)
                     ])}
                 />
               </CardBody>
             </Card>
           )}
-        </GridItem>
-      </GridContainer>
-      <GridContainer justify="flex-end">
-        <GridItem xs={12} sm={12} md={9}>
-          <AddChartForm onSubmit={submit} classes={classes} />
         </GridItem>
       </GridContainer>
     </div>

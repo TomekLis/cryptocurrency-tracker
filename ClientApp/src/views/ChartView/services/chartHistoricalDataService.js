@@ -22,9 +22,9 @@ function getHistoricalData(chart) {
   const daysDifference = (endDate - startDate) / 86400;
   console.log(chart);
   return fetch(
-    `${
-      config.dataProviderApi
-    }/histoday?fsym=BTC&tsym=USD&limit=${daysDifference}&aggregate=1&toTs=${endDate}`,
+    `${config.dataProviderApi}/histoday?fsym=${
+      chart.cryptocurrency
+    }&tsym=USD&limit=${daysDifference}&aggregate=1&toTs=${endDate}`,
     requestOptions
   ).then(handleResponse);
 }

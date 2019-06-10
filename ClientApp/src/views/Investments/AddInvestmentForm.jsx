@@ -25,7 +25,7 @@ const renderSelectField = ({
   handleChange
 }) => (
     <Fragment>
-      <InputLabel shrink htmlFor="demo-controlled-open-select">Crypto currency</InputLabel>
+      <InputLabel shrink htmlFor="demo-controlled-open-select">Cryptocurrency</InputLabel>
       <br />
       <Select
         errorText={touched && error}

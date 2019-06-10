@@ -10,6 +10,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
+import PowerSettingsNew from "@material-ui/icons/PowerSettingsNew";
+import { userActions } from "../../authentication/actions/userActions";
 // core components
 import AdminNavbarLinks from "../Navbars/AdminNavbarLinks.jsx";
 import RTLNavbarLinks from "../Navbars/RTLNavbarLinks.jsx";
@@ -79,6 +81,20 @@ const Sidebar = ({ ...props }) => {
           </NavLink>
         );
       })}
+      <div className={classes.item} activeClassName="active">
+        <ListItem
+          onClick={userActions.logout}
+          button
+          className={classes.itemLink}
+        >
+          <PowerSettingsNew className={classNames(classes.itemIcon)} />
+          <ListItemText
+            className={classNames(classes.itemText)}
+            primary={"Logout"}
+            disableTypography={true}
+          />
+        </ListItem>
+      </div>
     </List>
   );
   var brand = (

@@ -3,15 +3,13 @@ import React, { Component } from "react";
 import { Router, Route } from "react-router";
 import { connect } from "react-redux";
 import { Home } from "./components/Home";
-import Counter from "./components/Counter";
-
 import { LoginPage, PrivateRoute, alertActions } from "./authentication";
 import { history } from "./helpers";
-import { HistoricalData } from "./historical-data/components/HistoricalData";
 import "./assets/css/material-dashboard-react.css?v=1.6.0";
 import { Chart } from "./views/ChartView/Chart";
 import { AddInvestment } from "./views/Investments/AddInvestment";
 import { InvestmentsPage } from "./views/Investments/InvestmentsPage";
+import AddChartPage from "./views/Dashboard/AddChartPage";
 
 class App extends Component {
   displayName = App.name;
@@ -40,7 +38,7 @@ class App extends Component {
             <Route path="/login" component={LoginPage} />
             <PrivateRoute exact path="/" component={Home} />
             <PrivateRoute exact path="/chart/:id" component={Chart} />
-            <PrivateRoute exact path="/statistics" component={HistoricalData} />
+            <PrivateRoute exact path="/addChart" component={AddChartPage} />
             <PrivateRoute
               exact
               path="/investments"

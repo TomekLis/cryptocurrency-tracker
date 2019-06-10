@@ -36,7 +36,7 @@ const Chart = ({ chart, historicalData, dispatch }) => {
               <CircularProgress />
             ) : (
               <ConfigurableChart
-                label="BTC price in USD"
+                label={`${chart.cryptocurrency} price in USD`}
                 defalutValue={true}
                 startLine={2}
                 endLine={3}
